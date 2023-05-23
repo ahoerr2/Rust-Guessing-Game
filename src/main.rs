@@ -17,8 +17,6 @@ fn main() {
 
     // println!("The secret number is: {secret_number}");
 
-    let mut correct_guess_flag = false;
-
     loop {
 
         println!("Please Input Your Guess [{0}-{1}] (Best guess: {2})",
@@ -31,7 +29,10 @@ fn main() {
 
         io::stdin().read_line(&mut guess).expect("Failed to read line!");
 
-        let guess: u32 = guess.trim().parse().expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
 
         println!("Your guess: {guess}");
 
